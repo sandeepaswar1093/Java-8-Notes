@@ -1,0 +1,302 @@
+Stream API
+---------------------------------------------------------------------------------
+
+-> The addition of the stream api was one of the major features added to Java 8.
+
+-> Stream API is used to process the data.
+
+Note: Stream api is not for storing the data. It is meant for only processing the data.
+
+Note: In java, we will use collections to store the data. We will use Streams to process the data.
+
+Few Important Points about Streams
+----------------------------------
+1) A stream is not a data structure.
+
+2) Stream is used to perform bunch of operations on the data. 
+
+3) Stream will take the data from a Collection or Array.
+
+4) Stream will perform operations on the data but it will not change original data structure.
+
+
+Stream Creation
+----------------
+-> Streams can be created in two ways.
+
+		i) Using of ( ) method we can create stream
+		ii) Using stream( ) method also we can create stream
+Approach-1:
+------------------
+
+	Stream<Integer> stream = Stream.of(1,2,3,4,5,6);
+Approach-2:
+-----------
+
+	 List<String> list = new ArrayList<>();
+		list.add("Anushka");
+		list.add("Katrina");
+		list.add("Aliya");
+		list.add("Deepika");
+		list.add("Amisha");
+
+	 Stream<String> stream = list.stream();
+
+-> By using Streams we can perform below operations on the data
+
+		i) Intermediate Operations
+		ii) Terminal Operations
+
+-> Intermediate operational methods will not produce any results. They usally accept functional interface as 
+parameters and always returns new stream. Some examples for intermediate operations are filter() & map() methods.
+
+-> Terminal operational method will produce some results eg : count ( ), collect( ) etc.
+
+
+Example 1:
+
+
+package TypesOfOperationInStream;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
+
+public class StreamDemo {
+public static void main(String[] args) {
+	
+
+	Stream<Integer> stream = Stream.of(10,20,50,60,89);
+	 stream.forEach(i -> System.out.println(i));
+	  
+	 List<Integer> list=new ArrayList();
+	   list.add(11);
+	   list.add(22);
+	   list.add(33);
+	   list.add(44);
+	   
+	   Stream<Integer> stream2 = list.stream();
+	   stream2.forEach(i -> System.out.println(i));
+	    
+	  
+}
+}
+
+Example :
+
+package TypesOfOperationInStream;
+
+import java.util.stream.Stream;
+
+public class IntermediateOperations {
+
+	public static void main(String[] args) {
+		
+	
+	Stream<Integer> stream = Stream.of(10,20,50,60,89);
+	    
+     Stream<Integer> filterstream = stream.filter(i -> i>=50);
+     
+     filterstream.forEach(i1 -> System.out.println(i1));
+}
+}
+
+
+Example :
+
+package TypesOfOperationInStream;
+
+import java.util.stream.Stream;
+
+public class TerminalOperation {
+
+	public static void main(String[] args) {
+		
+	
+	Stream<Integer> stream = Stream.of(10,20,50,60,89);
+    
+    Stream<Integer> filterstream = stream.filter(i -> i>=20);
+    long count = filterstream.count();
+    System.out.println(count);
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------
+Streams with Filtering
+----------------------------------------------------------------------------------
+-> Stream interface having filter( ) method.
+
+-> filter( ) method will take Predicate as input
+
+-> Predicate is a functional interface which will take input and returns boolean value
+
+-> Predicate interface contains test( ) as abstract method. This method is used to execute lambda.
+
+Example :
+
+
+package filterOperations;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
+
+public class NamesFilter {
+
+	public static void main(String[] args) {
+		
+		List<String> list=new ArrayList();
+		
+		list.add("Santosh");
+		list.add("Bikkad");
+		list.add("Sandip");
+		list.add("Kartik");
+		
+		Stream<String> stream = list.stream();
+		Stream<String> filterStream = stream.filter(name -> name.startsWith("B"));
+		filterStream.forEach(name ->System.out.println(name));
+	}
+	
+}
+
+
+
+Example :
+
+
+package filterOperations;
+
+public class Person {
+
+	private String name;
+	private Integer age;
+	private String job;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Integer getAge() {
+		return age;
+	}
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+	public String getJob() {
+		return job;
+	}
+	public void setJob(String job) {
+		this.job = job;
+	}
+	@Override
+	public String toString() {
+		return "Person [name=" + name + ", age=" + age + ", job=" + job + "]";
+	}
+	public Person(String name, Integer age, String job) {
+		super();
+		this.name = name;
+		this.age = age;
+		this.job = job;
+	}
+	
+	
+}
+
+
+
+package filterOperations;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.BaseStream;
+import java.util.stream.Stream;
+
+public class PersonsFilter {
+
+	public static void main(String[] args) {
+
+		Person p1 = new Person("Santosh", 28, "Sr software Engineer");
+		Person p2 = new Person("Sandip", 66, "Sr software Engineer");
+		Person p3 = new Person("Kumar", 19, "Sr software Engineer");
+		Person p4 = new Person("Narayan", 44, "Sr software Engineer");
+		Person p5 = new Person("Tukaram", 56, "Sr software Engineer");
+
+		List<Person> list = new ArrayList();
+		list.add(p1);
+		list.add(p2);
+		list.add(p3);
+		list.add(p4);
+		list.add(p5);
+
+		Stream<Person> stream = list.stream();
+
+		Stream<Person> filter = stream.filter((p) -> p.getAge() >= 28);
+
+		filter.forEach(p -> System.out.println(p.getName()));
+
+	}
+}
+
+
+
+Mapping Operations: Mapping Operations are those operations that transfors the elemet of stram  and return new 
+stream with transformed elements.
+
+Example :
+
+package mappingOperations;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
+
+public class NamesMapping {
+
+	public static void main(String[] args) {
+		
+		List<String> list=new ArrayList<>();
+		list.add("Santosh");
+		list.add("Bikkad");
+		list.add("Suyog");
+		list.add("Anil");
+		
+		Stream<String> stream = list.stream();
+		Stream<String> map = stream.map(name -> name.toUpperCase());
+		map.forEach(name -> System.out.println(name));
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

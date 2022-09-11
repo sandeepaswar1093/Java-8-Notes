@@ -1,0 +1,56 @@
+Stream API
+---------------------------------------------------------------------------------
+-> The addition of the stream api was one of the major features added to Java 8.
+
+-> Stream API is used to process the data.
+
+Note: Stream api is not for storing the data. It is meant for only processing the data.
+
+Note: In java, we will use collections to store the data. We will use Streams to process the data.
+
+Few Important Points about Streams
+----------------------------------
+1) A stream is not a data structure.
+
+2) Stream is used to perform bunch of operations on the data. 
+
+3) Stream will take the data from a Collection or Array.
+
+4) Stream will perform operations on the data but it will not change original data structure.
+
+
+Stream Creation
+----------------
+-> Streams can be created in two ways.
+
+		i) Using of ( ) method we can create stream
+		ii) Using stream( ) method also we can create stream
+
+Approach-1:
+------------------
+
+	Stream<Integer> stream = Stream.of(1,2,3,4,5,6);
+
+Approach-2:
+-----------
+           List<String> list = new ArrayList<>();
+		list.add("Anushka");
+		list.add("Katrina");
+		list.add("Aliya");
+		list.add("Deepika");
+		list.add("Amisha");
+
+	 Stream<String> stream = list.stream();
+
+-> By using Streams we can perform below operations on the data
+
+		i) Intermediate Operations
+		ii) Terminal Operations
+
+-> Intermediate operational methods will not produce any results.
+ They usally accept functional interface as parameters and always returns new stream. 
+Some examples for intermediate operations are filter() & map() methods.
+
+-> Terminal operational method will produce some results eg : count ( ), collect( ) etc.
+
+

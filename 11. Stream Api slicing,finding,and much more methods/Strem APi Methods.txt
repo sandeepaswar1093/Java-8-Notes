@@ -1,0 +1,193 @@
+-----------------------------------------------------------------------------------------------
+Stream API methods 
+---------------------------------------------------------------------------------------------
+
+Slicing Operations In Streams
+------------------------------
+
+-> distinct ( ) -> it is used to get unique elements from the Stream.
+
+-> limit (long maxSize) -> it is used to get number of elements from the stream based on given size
+
+-> skip (long n) -> it is used to skip elements from starting to given length and returns remaining elements.
+
+
+Note:  The above 3 methods are intermediate methods only. They perform operation and returns new stream.
+
+
+Example :
+
+
+package slicingOperations;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
+
+public class SlicingOperationMethods {
+
+	public static void main(String[] args) {
+		
+		List<String> countries=new ArrayList<>();
+		countries.add("India");
+		countries.add("USA");
+		countries.add("London");
+		countries.add("Srilanka");
+		countries.add("Uk");
+		countries.add("USA");
+		countries.add("India");
+		
+//		Stream<String> stream = countries.stream();
+//		 Stream<String> distinct = stream.distinct();
+//		distinct.forEach((country)-> System.out.println(country));
+		
+//		Stream<String> stream = countries.stream();
+//		            Stream<String> limit = stream.limit(6);
+//		limit.forEach(country -> System.out.println(country));
+//		
+//		
+		
+		Stream<String> stream = countries.stream();
+		     Stream<String> skip = stream.skip(3);
+		     skip.forEach(country -> System.out.println(country));
+				
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Matching Operations in the streams
+----------------------------------
+=> Matching operations are terminal operations that are used to check if elements with
+ certain criteria are present in the stream or not.
+
+=> There are mainley three matching functions available in the Stream. these are
+
+	anyMatch ( )
+	allMatch( )
+	noneMatch( )
+
+
+Example :
+
+
+package matchingOperationsInStream;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class MatchingDemo {
+
+	public static void main(String[] args) {
+
+		List<Person> list = new ArrayList<>();
+
+		list.add(new Person("Santosh", 28, "India"));
+
+		list.add(new Person("Bikad", 28, "USA"));
+
+		list.add(new Person("Ganesh", 28, "Canada"));
+
+		list.add(new Person("Kumar", 28, "India"));
+
+		list.add(new Person("Tukaram", 28, "China"));
+		
+		
+//		boolean anyMatch = list.stream().anyMatch(p -> p.getCountry().equals("Uk"));
+//		System.out.println(anyMatch);
+//		
+//		boolean allMatch = list.stream().allMatch(p -> p.getCountry().equals("India"));
+//		System.out.println(allMatch);
+		
+		boolean nonMatch= list.stream().noneMatch(p -> p.getCountry().equals("UK"));
+		System.out.println(nonMatch);
+		
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+Finding Operations In Streams
+-------------------------------
+-> In Matching operations we can check weather data present in the stream or not based on given criteria.
+ After checking the condition it returns true or false value.
+
+-> By using Finding Operations we can check the condition and we can get the data based on condition.
+
+			findFirst()
+			findAny( )
+
+
+Example :
+
+
+package findingOperations;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
+
+import matchingOperationsInStream.Person;
+
+public class FindingDemo {
+
+	public static void main(String[] args) {
+		
+	
+	List<Person> list = new ArrayList<>();
+
+	list.add(new Person("Santosh", 28, "India"));
+
+	list.add(new Person("Bikad", 28, "USA"));
+
+	list.add(new Person("Ganesh", 28, "Canada"));
+
+	list.add(new Person("Kumar", 28, "India"));
+
+	list.add(new Person("Tukaram", 28, "China"));
+	
+	
+//	
+//	 Optional<Person> findFirst = list.stream().filter(p -> p.getCountry().equals("India")).findFirst();
+//	      System.out.println(findFirst);
+//	
+//	      
+	      
+
+	 Optional<Person> findany = list.stream().filter(p -> p.getCountry().equals("India")).findAny();
+	      System.out.println(findany );
+	
+	 
+}
+}
+
+
+
+
+
+

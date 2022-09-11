@@ -1,0 +1,263 @@
+Predicate :
+
+eXAMPLE 1)
+
+package predicate;
+
+import java.util.function.Predicate;
+
+public class NameStartingWith {
+
+	public static void main(String[] args) {
+		
+		String names[]= {"Santosh","Bikkad","Narayan","Ashish","Tukaram","Avinsah"};
+	
+	     Predicate<String> predicate=    (name) -> name.startsWith("N");
+	     
+	     for(String  name:names) {
+	    	 
+	   boolean test = predicate.test(name);
+	   if(test)
+	    {
+	    	System.out.println(name);
+	    }
+	     }
+	}
+	
+	
+}
+
+
+
+EXAMPLE 2)
+
+
+package predicate;
+
+public class Person {
+
+	private String name;
+	private Integer age;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Integer getAge() {
+		return age;
+	}
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+	@Override
+	public String toString() {
+		return "Person [name=" + name + ", age=" + age + "]";
+	}
+	public Person(String name, Integer age) {
+		super();
+		this.name = name;
+		this.age = age;
+	}
+	
+	
+	
+}
+
+package predicate;
+
+import java.util.ArrayList;
+import java.util.function.Predicate;
+
+public class PersonNamesPrinting {
+
+	
+	public static void main(String[] args) {
+		
+		
+		Person p1=new Person("Santosh",28);
+		Person p2=new Person("Bikkad",15);
+		Person p3=new Person("Kumar",33);
+		Person p4=new Person("Ashish",16);
+		Person p5=new Person("Samar",99);
+		
+		ArrayList<Person> al=new ArrayList();
+		al.add(p1);
+		al.add(p2);
+		al.add(p3);
+		al.add(p4);
+		al.add(p5);
+		
+		Predicate<Person> predicate=  (p)-> p.getAge() >=18;
+		
+		for(Person person:al) {
+			boolean test = predicate.test(person);
+			if(test) {
+				System.out.println(person.getName());
+			}
+		}
+		
+	}
+}
+
+
+
+Predicate Joining:
+
+To combine multiple predicates we will use predicate joining.
+Using and And using or() we can achieve predicate joining.
+
+Requirment : Write a java program to identify who is eligible for marriage.
+
+Condition :
+
+Person age should be >=21 and <=70.
+
+
+1)and():
+
+
+package predicateJoining;
+
+public class Person {
+
+	
+	private String name;
+	private Integer age;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Integer getAge() {
+		return age;
+	}
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+	@Override
+	public String toString() {
+		return "Person [name=" + name + ", age=" + age + "]";
+	}
+	public Person(String name, Integer age) {
+		super();
+		this.name = name;
+		this.age = age;
+	}
+	
+	
+}
+
+
+package predicateJoining;
+
+import java.util.ArrayList;
+import java.util.function.Predicate;
+
+import predicate.Person;
+
+public class PredicateJoinApp {
+
+	public static void main(String[] args) {
+		
+
+	
+	Person p1=new Person("Santosh",28);
+	Person p2=new Person("Bikkad",15);
+	Person p3=new Person("Kumar",33);
+	Person p4=new Person("Ashish",16);
+	Person p5=new Person("Samar",99);
+	
+	ArrayList<Person> al=new ArrayList();
+	al.add(p1);
+	al.add(p2);
+	al.add(p3);
+	al.add(p4);
+	al.add(p5);
+	
+	Predicate<Person> ageLowerLimit=  (p)-> p.getAge() >=21;
+	
+	Predicate<Person> ageUpperLimit=  (p)-> p.getAge() <=70;
+	
+	for(Person person:al) {
+		Predicate<Person> predicate = ageLowerLimit.and(ageUpperLimit);
+		boolean isEligible = predicate.test(person);
+		if(isEligible) {
+			System.out.println(person.getName());
+		}
+	}
+}
+}
+
+
+2) or()
+
+package predicateJoining;
+
+import java.util.ArrayList;
+import java.util.function.Predicate;
+
+import predicate.Person;
+
+public class PredicateJoinApp {
+
+	public static void main(String[] args) {
+		
+
+	
+	Person p1=new Person("Santosh",28);
+	Person p2=new Person("Bikkad",15);
+	Person p3=new Person("Kumar",33);
+	Person p4=new Person("Ashish",16);
+	Person p5=new Person("Samar",99);
+	
+	ArrayList<Person> al=new ArrayList();
+	al.add(p1);
+	al.add(p2);
+	al.add(p3);
+	al.add(p4);
+	al.add(p5);
+	
+	Predicate<Person> ageLowerLimit=  (p)-> p.getAge() >=21;
+	
+	Predicate<Person> ageUpperLimit=  (p)-> p.getAge() <=70;
+
+	
+	for(Person person:al) {
+		Predicate<Person> predicate = ageLowerLimit.or(ageUpperLimit);
+		boolean isEligible = predicate.test(person);
+		if(isEligible) {
+			System.out.println(person.getName());
+		}
+	}
+}
+}
+
+
+3)negate():
+
+package predicate;
+
+import java.util.function.Predicate;
+
+public class NameStartingWith {
+
+	public static void main(String[] args) {
+		
+		String names[]= {"Santosh","Bikkad","Narayan","Ashish","Tukaram","Avinsah"};
+	
+	     Predicate<String> predicate=    (name) -> name.startsWith("N");
+	     
+	     for(String  name:names) {
+	    	 
+	   boolean test = predicate.negate().test(name);
+	   if(test)
+	    {
+	    	System.out.println(name);
+	    }
+	     }
+	}
+	
+	
+}

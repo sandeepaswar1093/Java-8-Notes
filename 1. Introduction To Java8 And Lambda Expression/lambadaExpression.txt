@@ -1,0 +1,141 @@
+ -> Java is a programming language that was developed by Sun Microsystem
+
+-> Officially it released with name Java in 1995
+
+-> Java Released its 18th version in March 22, 2022.
+
+-> Although Java has released its Java 18 version, Java 8 is the most widely used version of java presently.
+
+-> 99 % of developers are using Java-8 in the industry to develop applications.
+
+-> Java 8 - version released on March 18th 2014.
+----------------------------------------------------------------------------------------------
+
+java 1. 0 -----> Major Release
+     java 1.1 --Minor Release
+
+java 1.2 ------> Major Release
+     java 1.3-->Minor Release
+     java 1.4-->Minor Release
+
+java 1.5 ------> Major Release
+     java 1.6 -->Minor Release
+     java 1.7--->Minor Release
+
+Java 1.8 ------> Major Release
+
+---------------------------------------------------------------------------------------------
+-> Java 8 introduced a lot of new apis
+-> Java 8 version changed coding style with those new apis
+Main aim of java-8
+------------------
+-> To simplify programming
+-> To enable functional programming *******
+-> To write more readable & consice code
+
+New Features in Java 8
+-----------------------
+1) Lambda Expressions
+2) Functional Interfaces 
+	 - Consumer
+	 - Supplier
+	 - Predicate
+	 - Function
+3)Stream API
+4) Interface changes (default & static methods)
+5)Date & Time api changes
+6)Optional class
+7)SplIterator
+8)Stringjoiner
+9)Method References
+10)Constructor References
+11)Collections Framework changes
+
+----------------------------------------------------------------------------------------------
+Lambda Expressions:
+----------------------------------------------------------------------------------------------
+
+-> LISP is the first programming language which supported for lambda expressions.
+
+LISP
+C
+C++
+Scala
+Ruby
+Python etc..
+
+-> Java started support for Lambda expressions from 1.8 version (Java is late in lambdas)
+
+-> Java is an object oriented programming language. By Introducing Lambdas in java it is supporting Functional programming also.
+
+
+Object Oritend Programming vs Functional Programming?
+------------------------------------------------------
+-> In Object Oriented Programming Languages Classes & Objects are main entities.
+
+-> If we want to create a function in OOP languages, that function should be created inside the class.
+
+
+-> In functional programming, function can exist outside the scope of an object.
+-> We can assign function to reference variable.
+-> One function can be passed as a parameter to another function.
+
+
+
+What is Lambda ?
+------------------
+-> A Lambda Expression is just an anonymous function
+
+		- No Name
+		- No Modifier
+		- No Return Type
+
+Why to use Lambda Expressions?
+------------------------------
+-> To write functional programming in java.
+
+-> To write more readable, maintainable and consice code
+
+
+How to write lambda expressions in java
+---------------------------------------
+-> Writing Lambdas is very easy if you know how to write methods in java
+
+
+-> Let us one example to understand how to write lambda
+
+
+Ex : 1
+-------
+
+ public void greet(){
+     System.out.println("Hi");
+  } 
+
+-------------------------------------------
+() -> System.out.println("Hi");
+
+Example 1.1	  
+public void greet(){
+     System.out.println("Hi");
+    System.out.println("Hellow");
+}
+-------------------------------------------
+() -> { System.out.println("Hi");
+ System.out.println("Hellow");
+}
+  
+
+
+
+Ex: 2
+------
+(int a, int b){
+	S.o.p(a+b);
+}
+-----------------------------------------------
+  (a, b) -> S.o.p(a+b);
+
+
+
+

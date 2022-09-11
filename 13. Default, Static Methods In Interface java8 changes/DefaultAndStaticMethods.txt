@@ -1,0 +1,142 @@
+Interface related changes in java 8
+----------------------------------------------------------------------------------
+
+Q) What is Interface ?
+
+Ans) 
+
+-> Interface is a contract which contains specification.
+
+-> Interface should contain only abstract methods (This is true upto 1.7v of java)
+
+-> The method which doesn't contains body is called as abstract method
+
+	Ex : public User getUserById(Integer userId);
+
+-> From Java 8 onwards we can write concrete methods also in interace.
+
+-> The method which contains body is called as Concreate method.
+
+	Ex : public Integer sum(Integer a, Integer b){
+		return a + b;
+	     }
+
+Note: Interface concreate methods should be "default" or "static" methods.
+----------------------------------------------------------------------------------
+public interface Vehicle {
+
+	void cleanVehicle();
+
+}
+
+-> abstract methods available in the interface are by default public and abstract. 
+No need to write public and abstract keywords.
+
+
+	void cleanVehicle()  ===> public abstract void cleanVehicle( )
+
+-----------------------------------------------------------------------------------
+public interface Vehicle {
+
+	void cleanVehicle();
+
+	default void startVehicle() {
+		System.out.println("Vehicle started...!!");
+	}
+
+}
+----------------------------------------------------------------------------------
+
+-> As per the java rule, when we are implementing interface, 
+we have to implement all the abstract methods available in the interface.
+
+-> If we add new method in interface, all the implementation classes will be effected.
+
+ -> To avoid this problem default methods & static method got introduced in java 1.8 version.
+
+-> default methods we can override in implementation classes.
+
+-> We can write static methods with body in interfaces from java 1.8 version
+
+-> The static methods which are available in interfaces can't be overriden 
+in the implementation classes.
+
+
+
+
+
+Example :
+
+
+package interfaceChanges;
+
+public interface Vehicle {
+
+	public abstract void cleanVehicle();
+	
+	default void sensor() {
+		 System.out.println("Sensor added");
+	 }
+	
+	static void fuelCheck() {
+		System.out.println("Checkig fuel");
+	}
+	
+}
+
+
+
+package interfaceChanges;
+
+public class I20 implements Vehicle{
+
+	@Override
+	public void cleanVehicle() {
+		System.out.println("I20 car getting clean");
+		
+	}
+   
+	@Override
+     public  void sensor() {
+		 System.out.println(" I20 Sensor added");
+	 }
+}
+	
+
+
+
+package interfaceChanges;
+
+public class Santro implements Vehicle{
+
+	@Override
+	public void cleanVehicle() {
+		System.out.println("Santro car getting clean");
+		
+	}
+
+}
+
+
+
+
+package interfaceChanges;
+
+public class MyApp {
+
+	public static void main(String[] args) {
+		
+		Santro santro=new Santro();
+		santro.cleanVehicle();
+		Vehicle.fuelCheck();
+		
+		I20 i20=new I20();
+		i20.cleanVehicle();
+		i20.sensor();
+		Vehicle.fuelCheck();
+	}
+}
+
+
+
+

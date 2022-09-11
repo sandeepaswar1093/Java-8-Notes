@@ -1,0 +1,213 @@
+Scnerio 1:
+
+package com.bikkadIT.lambda;
+
+public interface Greetings {
+
+	public void greet();
+}
+
+
+package com.bikkadIT.lambda;
+
+public class EnglishGreeting implements Greetings{
+
+	@Override
+	public void greet() {
+	System.out.println("Hellow");
+		
+	}
+
+}
+
+
+package com.bikkadIT.lambda;
+
+public class HindiGreeting implements Greetings {
+
+	@Override
+	public void greet() {
+		System.out.println("Namaskar");
+
+	}
+
+}
+
+
+
+package com.bikkadIT.lambda;
+
+public class LambdaExpression {
+
+	public static void main(String[] args) {
+		
+	
+	EnglishGreeting englishGreeting=new EnglishGreeting();
+	englishGreeting.greet();
+
+	HindiGreeting hindiGreeting=new HindiGreeting();
+     hindiGreeting.greet();	
+     
+     Greetings hgreeting=new HindiGreeting();
+     hgreeting.greet();
+     
+     Greetings egreetings=new EnglishGreeting();
+     egreetings.greet();
+     
+}
+}
+
+
+
+Scnerio 2:
+
+
+package com.bikkadIT.lambda;
+
+public interface Greetings {
+
+	public void greet();
+}
+
+package com.bikkadIT.lambda;
+
+public class HindiGreeting implements Greetings {
+
+	@Override
+	public void greet() {
+		System.out.println("Namaskar");
+
+	}
+
+}
+
+
+package com.bikkadIT.lambda;
+
+public class EnglishGreeting implements Greetings{
+
+	@Override
+	public void greet() {
+	System.out.println("Hellow");
+		
+	}
+
+}
+
+
+package com.bikkadIT.lambda;
+
+public class LambdaExpression {
+
+	public static void wish(Greetings greetings) {
+		greetings.greet();
+	}
+	
+	public static void main(String[] args) {
+		
+	
+	Greetings hindi=new HindiGreeting();
+	 wish(hindi);
+     
+	 Greetings english=new EnglishGreeting();
+	 wish(english);
+	 
+}
+}
+
+Scnerio 3:
+
+package com.bikkadIT.lambda;
+
+public interface Greetings {
+
+	public void greet();
+}
+
+
+package com.bikkadIT.lambda;
+
+public class LambdaExpression {
+
+	public static void wish(Greetings greetings) {
+		greetings.greet();
+	}
+
+	public static void main(String[] args) {
+
+		wish(new Greetings() {
+			public void greet() {
+				System.out.println("Namaskar");
+			}
+		});
+
+		wish(new Greetings() {
+			public void greet() {
+				System.out.println("Hellow");
+			}
+		});
+
+	}
+}
+
+
+
+
+Scnerio 4:
+
+
+package com.bikkadIT.lambda;
+
+public interface Greetings {
+
+	public void greet();
+}
+
+
+
+package com.bikkadIT.lambda;
+
+public class LambdaExpression {
+
+	public static void wish(Greetings greetings) {
+		greetings.greet();
+	}
+
+	public static void main(String[] args) {
+
+		wish(() -> System.out.println("Namaskar"));
+
+		wish(() -> System.out.println("Hellow"));
+
+	}
+}
+
+
+Scnerio 5:
+
+package com.bikkadIT.lambda;
+
+public interface Greetings {
+
+	public void greet();
+}
+
+
+
+package com.bikkadIT.lambda;
+
+public class LambdaExpression {
+	public static void main(String[] args) {
+ 
+	Greetings hindi=() ->System.out.println("Namaskar");
+	hindi.greet();
+    Greetings english=() ->System.out.println("Hellow");
+    english.greet();
+	
+	}
+}
+
+
+
+
+

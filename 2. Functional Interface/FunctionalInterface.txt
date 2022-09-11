@@ -1,0 +1,141 @@
+--------------------------------------------------------------------------
+Functional Interfaces
+--------------------------------------------------------------------------
+
+-> If an interface contains only one abstract method then it is called as Functional Interface.
+
+-> Using Functional Interface we can call/invoke Lambda Expressions.
+
+-> Functional Interface can contain default and static methods also.
+
+-> Functional Interface rule is applicable only for abstract method. It should contain only one
+ abstract method and it can contain any no.of static and default methods.
+
+-> To represent interface as functional interface we will use @FunctionalInterface Annotation.
+
+	@FunctionalInterface
+	public interface Greeting{
+		public abstarct void greet();
+   	}
+
+-> Writing @FunctionalInterface annotation is optional. If we write this annotation compiler
+ will check do we have only one abstract method in the interface or not.
+
+
+   public interface Greeting{
+	public void greet();
+   }
+-> We can write default and static methods in functional interface.
+
+
+
+
+
+
+
+Ex-1: (This is valid functional interface)
+------
+@FunctionalInterface
+public interface MyInterface{
+      public abstract void m1();
+}
+
+
+
+
+
+
+
+
+
+Ex-2: (This is invalid because 2 abstract methods are there)
+------
+@FunctionalInterface
+public interface MyInterface{
+      public void m1();
+      public abstract void m2();
+}
+
+
+
+
+
+
+
+
+
+
+Ex-3:
+-----
+@FunctionalInterface
+public interface Parent{
+   public void m1();
+}
+
+@FunctionalInterface
+public interface Child extends Parent{
+
+}
+
+-> In the above scenario, Child interface doesn't have any abstract methods. 
+Child having access for Parent class abstract method hence Child is also functional interface.
+
+Ex-4:
+-----
+@FunctionalInterface
+public interface Parent{
+   public void m1();
+}
+
+@FunctionalInterface
+public interface Child extends Parent{
+   public void m1();
+}
+
+-> In the above scenario, Child interface overriding Parent interface abstract method hence Child
+ is having only one abstract method. 
+So it is valid Functional Interface.
+
+Ex-5:
+-----
+@FunctionalInterface
+public interface Parent{
+   public void m1();
+}
+
+@FunctionalInterface
+public interface Child extends Parent{
+   public void m2();
+}
+
+-> In the above scenario, Child interface having 2 abstract methods hence it is not functional interface.
+
+Ex-6:
+-----
+@FunctionalInterface
+public interface Parent{
+   public void m1();
+}
+
+public interface Child extends Parent{
+   public void m2();
+}
+
+-> In the above scenario, Child interface can contain any no.of abstract methods because 
+it is not having @FunctionalInterface annotation.
+
+Ex-7:
+-----
+
+public interface Parent{
+   public void m1();
+}
+
+-> In the above scenario, Parent is functional interface only.
+
+-> Writing @FunctionalInterface is optional
+
+-> If we write @Functional Interface, java compiler will verify that is valid functional interface or not.
+
+
+

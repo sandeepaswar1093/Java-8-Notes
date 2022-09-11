@@ -1,0 +1,642 @@
+----------------------------------------------------------------------------------------------
+Predefined Functional interfaces introduced in java-8
+-----------------------------------------------------------------------------------------------
+-> Several functional interfaces got introduced in java-8, they are
+
+1) Predicate
+2) Supplier
+3) Consumer
+4) Function
+-> The above functional interfaces are provided in java.util.function package.
+
+Predicate
+=========
+-> Predicate is used for checking condition and returns true or false value.
+
+-> Predicate is having test ( ) method which is used to invoke lambda expression.
+
+-> Predicate is a predefined functional interface.
+
+-> Predicate is having an abstract method called test().
+
+-> We have below methods in Predicate
+
+	test ( ) ----> It is abstract method
+
+	negate() ---> To reverse condition.
+	and() ---> if all predicates statisfield returns true.
+	or() ---> if any one predicate satisfied returns true.
+ 
+nagate(),and(),or these are default methods.
+
+-> If we have a lambda which checks condition and returns true or false then we can invoke that lamdba using
+ Predicate functional interface like below
+
+	//Checking given number is even number or not
+	Predicate<Integer> predicate = (i) -> i%2 == 0 ;
+	boolean isEventNum  = predicate.test(10);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------
+Ex: Check weather given number is greather than 20 or not.
+---------------------------------------------------------------------------------------------
+//Logic wihtout Lambda
+public boolean test(int number){
+    if(number > 20){
+	return true;
+    }else{
+	return false;
+    }
+}
+--------------------------------------------------------------------------------------------
+//Logic with Lambda
+(number) -> number > 20 ;
+
+-----------------------------------------------------------------------------------------------
+//with Predicate
+
+Predicate<Integer> predicate = (number) -> number > 20;
+S.o.p(predicate.test(29));
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------
+Requirement : Write a program to check person name is having 7 characters not. If name having 7 or
+ more characters return true otherwise return false.
+--------------------------------------------------------------------------------------------
+
+Predicate<String> predicate = (name) -> name.length() >= 7 ;
+System.out.println(predicate.test("Saurabh Navghare"));
+
+----------------------------------------------------------------------------------------------
+
+
+
+Requirement: Write a program to print names which are starting with character 'A' using lambda from below names.
+
+Names : Kajal, Katrina ,Anushka, priyanka , Anupama, Aishwarya
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public class NamesPrinting {
+
+	public static void main(String[] args) {
+	String[] names = { "Kajal", "Katrina ", "Anushka", "priyanka ", "Anupama", "Aishwarya" };
+
+		Predicate<String> predicate = (name) -> name.startsWith("A");
+
+		for (String name : names) {
+			if (predicate.test(name)) {
+				System.out.println(name);
+			}
+		}
+
+Requirement : Write a java program to print person names who are eligible for vote from below persons using Lambda.
+
+
+Person details
+----------------------
+Name = Santosh, Age = 20
+Name = Anil, Age = 10
+Name = kumar, Age = 21
+Name = natha, Age = 19
+Name = kanta, Age= 33
+
+
+
+package com.bikkadIt.beans;
+
+public class Person {
+
+	private String name;
+	private Integer age;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Integer getAge() {
+		return age;
+	}
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+	public Person(String name, Integer age) {
+		super();
+		this.name = name;
+		this.age = age;
+	}
+	
+	
+}
+
+
+package com.bikkadIt.beans;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Predicate;
+
+public class PersonsNamePrint {
+
+	public static void main(String[] args) {
+		
+		Person p1=new Person("Santosh",11);
+		Person p2=new Person("Anil",24);
+		Person p3=new Person("kumar",20);
+		Person p4=new Person("natha",25);
+		Person p5=new Person("kanta",33);
+		
+		List<Person> persons=Arrays.asList(p1,p2,p3,p4,p5);
+		
+	Predicate<Person> predicate= (p) -> p.getAge() >=18;
+	
+	for(Person person:persons) {
+	 
+		boolean eligble=predicate.test(person);
+		if(eligble) {
+			System.out.println(person.getName());
+		}
+	}	
+	}
+}
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------
+Predicate Joining
+---------------------------------------------------------------------------------------------
+-> To combine multiple predicates we will use Predicate Joining
+
+
+-> negate() , and() , or() methods are default methods in Predicate interface
+
+-> Using and( ) & or( ) methods we can achieve predicate joining
+
+----------------------------------------------------------------------------------------------
+
+
+Requirement : Write a java program to identify who is eligible for marriage.
+
+Conditions : Person age should be >=21 and <=64
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------
+public class PredicateJoinApp {
+
+	public static void main(String[] args) {
+		Person p1 = new Person("Raju", 21);
+		Person p2 = new Person("Chetan", 23);
+		Person p3 = new Person("Anil", 67);
+		Person p4 = new Person("Gita", 14);
+		Person p5 = new Person("Suchitra", 26);
+
+		List<Person> persons = Arrays.asList(p1, p2, p3, p4, p5);
+
+		Predicate<Person> ageLowerLimit = (p) -> p.getAge() >= 21;
+
+		Predicate<Person> ageUpperLimit = (p) -> p.getAge() <= 64;
+
+		for (Person p : persons) {
+			Predicate<Person> predicate = ageLowerLimit.and(ageUpperLimit);
+			boolean isEligibleForMarriage = predicate.test(p);
+			if (isEligibleForMarriage) {
+				System.out.println(p.getName());
+			}
+		}
+	}
+}
+---------------------------------------------------------------------------------------------
+-> We can add multiple predicates also like below
+
+		//and() -> if all predicates satisfied then only returns true
+		Predicate finalPredicate1 = p1.and(p2).and(p3).and(p4).and(p5);
+
+		//or() -> If any one predicate satisfied then it returns true
+		Predicate finalPredicate2 = p1.or(p2).or(p3).or(p4).or(p5);
+
+
+Note: Here p1, p2, p3, p4 and p5 are predicates
+
+-> We can execute final predicate by calling test( ) method
+
+		boolean status1 = finalPredicate1.test(input);
+
+		boolean status2 = finalPredicate2.test(input);
+
+-
+
+
+
+---------------------------------------------------------------------------------------------
+Negate() Method:
+
+
+Example 1:package com.bikkadIt.beans;
+
+import java.util.function.Predicate;
+
+public class EvenCheck {
+
+	public static void main(String[] args) {
+		
+		Predicate<Integer> predicate= (i) -> i % 2 == 0;
+		
+		System.out.println(predicate.test(11));
+	}
+}
+
+
+
+package com.bikkadIt.beans;
+
+import java.util.function.Predicate;
+
+public class EvenCheck {
+
+	public static void main(String[] args) {
+
+	
+			Predicate<Integer> predicate = (i) -> i % 2 == 0;
+			boolean status = isEven(predicate, 10);
+			System.out.println(status);
+
+		}
+		public static boolean isEven(Predicate<Integer> predicate, Integer i) {
+			// return predicate.negate().test(i);
+			return predicate.negate().test(i);
+		}
+	}
+
+
+----------------------------------------------------------------------------------------------
+BiPredicate Interface
+---------------------------------------------------------------------------------------------
+-> Predicate<T> takes only one parameter and returns the result.
+
+-> If we want to supply two parameters as input for lambda and return the result
+ then we can use B‬iPredicate for this.
+
+-> BiPredicate<T, T> is  functional interface which contains a abstract method test ( ).
+
+-> BiPredicate<T, T> takes two parameters and returns boolean value.
+------------------------------------------------------------------------------------------
+package com.bikkadIt.beans;
+
+import java.util.function.BiPredicate;
+
+public class BiPredicateDemo {
+
+	public static void main(String[] args) {
+		
+	BiPredicate<Integer,Integer> bipredicate=	(i,j) -> i+j >= 100;
+	System.out.println(bipredicate.test(10, 20));
+	}
+}
+
+-----------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+Supplier, Consumer, BiConsumer, Function & BiFunction  Interfaces
+-----------------------------------------------------------------------------------------
+
+-> Supplier is an interface that does not take any arguments but it produces a value when the get() function got called.
+
+-> Suppliers are useful when our lambda is not taking any input but it is providing some ouput.
+
+-> It is predefined functional interface
+
+-> It contains only one abstract method i.e get ( )
+
+ Ex :		Supplier<Date> s = ( ) -> new Date( );
+			S.o.p(s.get());
+
+--------------------------------------------------------------------------------------------
+public class DateApp {
+
+	public static void main(String[] args) {
+
+		Supplier<Date> s = () -> new Date();
+		System.out.println(s.get());
+	}
+}
+-----------------------------------------------------------------------------------------------
+public class OtpGenerator {
+
+	public static void main(String[] args) {
+
+		Supplier<String> s = () -> {
+			String otp = "";
+			for (int i = 1; i <= 6; i++) {
+				otp = otp + (int) (Math.random() * 10);
+			}
+			return otp;
+		};
+
+		System.out.println(s.get());
+		System.out.println(s.get());
+		System.out.println(s.get());
+	}
+}
+-----------------------------------------------------------------------------------------------
+-> As Supplier doesn't take any input we don't have any BiSupplier concept.
+
+
+-----------------------------------------------------------------------------------------------
+Consumer
+-----------------------------------------------------------------------------------------------
+-> It is a predefined functional interface
+
+-> It contains only one abstract method i.e accept(T t)
+
+-> Consumer will take input but it won't return anything.
+
+-> Consumer can be used in a scenario where our lambda should take input and perform operation based on the input
+ but no need to return anything.
+
+Syntax:
+
+	interface Consumer{
+	    void accept(T t);
+	}
+
+---------------------------------------------------------------------------------------------
+public class ConsumerDemo {
+
+	public static void main(String[] args) {
+
+		Consumer<String> consumer1 = (name) -> System.out.println(name + ", Good Mrng..!!");
+		consumer1.accept("Santosh");
+
+		Consumer<Integer> consumer2 = (i) -> System.out.println(i * i);
+		consumer2.accept(20);
+	}
+
+}
+------------------------------------------------------------------------------------------------------
+-> Consumer interface will take only one input
+
+-> If we want to supply two inputs for lambda then we can use BiConsumer.
+
+Syntax : 
+
+		interface BiConsumer<T, U){
+			accept(T t, U u);
+		}
+
+		T - represents first argument
+		U - represents second argument
+
+
+Note: BiConsumer interface having only one abstract method i.e accept(T t, U u). 
+It will take two inputs and performs operation but it won't return anything.
+
+-----------------------------------------------------------------------------------------------
+public class BiConsumerDemo {
+
+	public static void main(String[] args) {
+
+		BiConsumer<String, String> bic = (arg1, arg2) -> {
+			System.out.println("Hi, i am " + arg1);
+			System.out.println("I am from " + arg2);
+		};
+
+		bic.accept("Santsoh", "Osmanabad");
+	}
+}
+-----------------------------------------------------------------------------------------------
+
+-> Predicate interface will take one input and returns boolean value as output
+
+-> BiPredicate interface will take two inputs and returns boolean value as output.
+
+-> Supplier interface will not take any input and returns output,
+
+-> We don't have BiSupplier concept
+
+-> Consumer interface will take one input and it won't return anything
+
+-> BiConsumer interface will take two inputs and it won't return anything,
+
+
+Function:
+----------------------------------------------------------------------------------------------
+Requirement : Write lambda for below method and call it using Predeinfed F.I.
+----------------------------------------------------------------------------------------------
+
+public Ticket bookTicket(Passenger passenger){
+
+	 //logic to book ticket
+
+	return ticketObj;
+}
+--------------------------------------------------------------------------------------------
+
+-> As we can see, above bookTicket( ) method taking Passenger obj as input and returning Ticket obj as output.
+
+-> To working these kind of requirements we can use Function interface.
+
+-> Function is a predefined functional interface provided in java 1.8.
+
+-> Function interface can input and can provide output.
+
+-> Function interface contains only one abstract method i.e R apply(T t)
+
+syntax: 
+
+		interface Function<T,R> {
+		    R apply(T t);
+		}
+
+		-> T represents input/parameter object type
+		-> R represents returning object type
+
+Note: In realtime most of our requirements will match with Function interface only 
+because our methods will take input  and perform operation and then reutrn result.
+
+
+Ex-2: Taking LoginForm object as input and returning String as output
+
+public String login(LoginForm input){
+
+	//check login credentials with db
+
+	return status;
+}
+
+Ex-3: Taking UserForm object as input and returning String as output
+public String login(UserForm input){
+
+	//insert user in db
+
+	return status;
+}
+--------------------------------------------------------------------------------------------
+public class FunctionDemo {
+
+	public static void main(String[] args) {
+
+		Function<String, String> f1 = (s) -> s.toUpperCase();
+		System.out.println(f1.apply("Santosh"));
+
+		Function<Integer, Integer> f2 = (i) -> (i * i);
+		System.out.println(f2.apply(10));
+	}
+
+}
+---------------------------------------------------------------------------------------------
+
+-> Function interface will take only one input and returns output.
+
+-> BiFunction interface will take two inputs and return output
+
+syntax: 
+
+		interface BiFunction<T, U, R><>{
+			R apply(T t, U u);
+		}
+
+		T- first arg type
+		U- second arg type
+		R- return type
+
+Example :
+
+package fuction;
+
+import java.util.function.BiFunction;
+
+public class BiFunctionDemo {
+
+	public static void main(String[] args) {
+		
+
+	
+	BiFunction<Integer, Integer, Integer> f3 = (i, j) -> (i * j);
+	System.out.println(f3.apply(10, 20));
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

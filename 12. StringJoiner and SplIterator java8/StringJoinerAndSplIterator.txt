@@ -1,0 +1,93 @@
+----------------------------------------------------------------------------------------------
+StringJoiner class available in Java 1.8 version
+---------------------------------------------------------------------------------------------
+-> StringJoiner class got introduced in java 1.8 version
+
+-> StringJoiner is a final class.
+
+-> StringJoiner class present in java.util package
+
+-> StringJoiner class is used to construct sequence of characters seperated by a delimiter.
+
+---------------------------------------------------------------------------------------------
+	StringJoiner joiner = new StringJoiner(delimiter);
+	StringJoiner joiner = new StringJoiner(delimiter, prefix, suffix);
+
+
+package stringJoiner;
+
+import java.util.StringJoiner;
+
+public class StringJoinerDemo {
+
+	public static void main(String[] args) {
+		
+	//	StringJoiner stringJoiner=new StringJoiner(",");
+		StringJoiner stringJoiner=new StringJoiner(",","{","}");
+		stringJoiner.add("SANTOSH");
+		stringJoiner.add("Bikkad");
+		stringJoiner.add("Pune");
+		stringJoiner.add("IT");
+		System.out.println(stringJoiner);
+		
+	}
+}
+
+
+
+Is StringJoiner thread safe?
+So, no, it is not thread safe at all.
+
+
+
+-----------------------------------------------------------------------------------------------
+SplIterator 
+-----------------------------------------------------------------------------------------------
+
+-> SplIterator introduced in java 1.8 version
+
+-> SplIterator can be used for traversing elements of the source.
+
+
+-----------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------
+-> In normal Iterator we have hasNext( ) and next( ) methods to traverse the data.
+
+-> In SplIterator we have forEachRemaining(Consumer c) method to travese the data.
+----------------------------------------------------------------------------------------------
+
+Example :
+
+package spliterator;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class SplitertorDemo {
+	public static void main(String[] args) {
+
+		List<String> list = new ArrayList<>();
+		list.add("Santosh");
+		list.add("Bikkad");
+		list.add("Sandip");
+		list.add("Umesh");
+
+		Iterator<String> iterator = list.iterator();
+//
+//		while (iterator.hasNext()) {
+//			String next = iterator.next();
+//			System.out.println(next);
+//		}
+		
+	//	iterator.forEachRemaining(name -> System.out.println(name));
+     iterator.forEachRemaining(System.out::println);
+	}
+}
+
+
+
+
+
+

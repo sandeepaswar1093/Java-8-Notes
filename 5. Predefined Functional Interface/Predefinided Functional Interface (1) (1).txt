@@ -1,0 +1,215 @@
+----------------------------------------------------------------------------------------------
+Predefined Functional interfaces introduced in java-8
+-----------------------------------------------------------------------------------------------
+-> Several functional interfaces got introduced in java-8, they are
+
+1) Predicate
+2) Supplier
+3) Consumer
+4) Function
+-> The above functional interfaces are provided in java.util.function package.
+
+Predicate
+=========
+-> Predicate is used for checking condition and returns true or false value.
+
+-> Predicate is having test ( ) method which is used to invoke lambda expression.
+
+-> Predicate is a predefined functional interface.
+
+-> Predicate is having an abstract method called test().
+
+-> We have below methods in Predicate
+
+	test ( ) ----> It is abstract method
+	negate() ---> To reverse condition.
+	and() ---> if all predicates statisfield returns true.
+	or() ---> if any one predicate satisfied returns true.
+ 
+nagate(),and(),or() these are default methods.
+
+-> If we have a lambda which checks condition and returns true or false then we can invoke 
+that lamdba using Predicate functional interface like below
+
+	Example 1: Without lambda and predicate
+
+package predicate;
+
+public class EvenOddWithoutPredicate {
+
+	
+	public boolean oddEvenNo(int number) {
+		
+		if(number %2 ==0) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static void main(String[] args) {
+		
+		EvenOddWithoutPredicate oddeven=new EvenOddWithoutPredicate();
+		boolean oddEveNo = oddeven.oddEvenNo(11);
+		if(oddEveNo) {
+			System.out.println("Even no");
+		}
+		else {
+			System.out.println("Odd no");
+		}
+		
+		
+		
+	}
+}
+
+Example 2: with predicate And lambda
+
+
+
+package predicate;
+
+import java.util.function.Predicate;
+
+public class OddEvenCheckingWithPredicate {
+
+	public static void main(String[] args) {
+
+		Predicate<Integer> predicate = (number) -> number % 2 == 0;
+		boolean test = predicate.test(110);
+		System.out.println(test);
+		if(test) {
+			System.out.println("even no");
+		}else {
+			System.out.println("odd no");
+		}
+
+	}
+}
+
+
+Example no 3: without predicate
+
+package predicate;
+
+public class NoGreateOrNotWithoutPredicate {
+
+	public boolean gretaeorNot(int number) {
+		
+		if(number >20) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	public static void main(String[] args) {
+		
+		NoGreateOrNotWithoutPredicate greaterornot=new NoGreateOrNotWithoutPredicate();
+		boolean gretaeorNot = greaterornot.gretaeorNot(15);
+		if(gretaeorNot) {
+			System.out.println("greater number");
+		}else {
+			System.out.println("Not greater");
+		}
+	}
+}
+
+
+
+
+Example no 4: with predicate
+
+package predicate;
+
+import java.util.function.Predicate;
+
+public class NoGreateOrNotWithoutPredicate {
+
+	public static void main(String[] args) {
+
+		Predicate<Integer> predicate = (number) -> number > 20;
+
+		boolean test = predicate.test(12);
+
+		if (test) {
+			System.out.println("greater number");
+		} else {
+			System.out.println("Not greater");
+		}
+	}
+}
+
+
+
+Example no 3:
+
+package predicate;
+
+public class PersonNameLength {
+
+	
+	public boolean personNamelen(String name) {
+		if(name.length()>=7) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
+	public static void main(String[] args) {
+		
+
+	PersonNameLength  pl=new PersonNameLength();
+	boolean personNamelen = pl.personNamelen("Sntosh");
+	System.out.println(personNamelen);
+}
+}
+
+
+
+Example 6:
+
+
+package predicate;
+
+import java.util.function.Predicate;
+
+public class PersonNameLength {
+
+public static void main(String[] args) {
+		
+
+	Predicate<String>  predicate=(name) -> name.length()>=7;
+	boolean test = predicate.test("Sanosh");
+		System.out.println(test);		
+			
+	}
+
+}
+
+
+Requirment: write a program to print names which are starting with charactor 'A'  using lambda from below names.
+
+Names: Kunal ,karan,Avinash,Pavan,Ankita,Anamika.
+
+Requirment: write a program to print person names who are eligible for vote from below persons.
+
+Person details:
+
+Name=Santosh, age=28
+Name=sagar, age=18
+Name=tukaram, age=56
+Name=Narayan, age=13
+Name=rahul, age=43
+Name=ajinkya, age=28
+
+
+
+
+
+
+
+
+
+
+
